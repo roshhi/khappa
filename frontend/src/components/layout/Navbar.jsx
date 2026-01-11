@@ -40,7 +40,7 @@ export default function Navbar() {
         
         {/* Logo */}
         <NavLink to={'/'} className="flex items-center space-x-2 cursor-pointer group ">
-          <div className="p-2 rounded-xl bg-linear-to-br from-indigo-500 to-indigo-600">
+          <div className="p-2 rounded-xl bg-gradient-to-r from-indigo-600 to-emerald-500">
             <CirclePile className="w-5 h-5 text-white transition-transform duration-500 ease-out group-hover:rotate-180" />
           </div>
           <h1 className="text-xl font-extrabold">Khappa</h1>
@@ -91,7 +91,7 @@ export default function Navbar() {
         initial="hidden"
         animate={menuOpen ? "visible" : "hidden"}
         variants={dropdownVariants}
-        className="absolute top-full right-4 mt-3 md:hidden w-52 rounded-xl bg-white shadow-xl p-2 space-y-1 z-50"
+        className={`absolute top-full right-4 mt-3 md:hidden w-52 rounded-xl bg-white shadow-xl p-2 space-y-1 z-50 ${menuOpen ? 'pointer-events-auto' : 'pointer-events-none'}`}
         >
             {navLinks.map((link) => {
                 const isActive =

@@ -1,16 +1,22 @@
-import Navbar from "./components/layout/Navbar"
+import MainLayout from "./components/layout/MainLayout"
 import LandingPage from "./pages/LandingPage"
-import { BrowserRouter } from "react-router"
-import Footer from "./components/layout/Footer"
+import CategoriesPage from "./pages/CategoriesPage";
+import CategoriesProductsPage from "./pages/CategoriesProductsPage";
+import ProductDetailsPage from "./pages/ProductDetailsPage";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+
 function App() {
   return (
-
     <BrowserRouter>
-        <Navbar/>
-        <LandingPage/>
-        <Footer/>
+      <Routes>
+        <Route path="/" element={<MainLayout/>}>
+            <Route index element={<LandingPage/>}/>
+            <Route path="categories" element={<CategoriesPage/>}/>
+            <Route path="categories/:id" element={<CategoriesProductsPage/>}/>
+            <Route path="categories/product/:id" element={<ProductDetailsPage/>}/>
+        </Route>
+      </Routes>
     </BrowserRouter>
-
   )
 }
 

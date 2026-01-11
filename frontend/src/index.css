@@ -20,4 +20,39 @@ body {
 h1, h2, h3, h4, h5, h6 {
     font-family: var(--font-heading);
 }
+
+/* CSS Loader */
+.loader {
+    width: 50px;
+    aspect-ratio: 1;
+    border-radius: 50%;
+  
+    /* Tailwind equivalent gradient */
+    background: conic-gradient(
+      #4f46e5,   /* indigo-600 */
+      #10b981,   /* emerald-500 */
+      #4f46e5
+    );
+  
+    /* Border thickness */
+    -webkit-mask: radial-gradient(
+      farthest-side,
+      transparent calc(100% - 3px),
+      #000 0
+    );
+    mask: radial-gradient(
+      farthest-side,
+      transparent calc(100% - 3px),
+      #000 0
+    );
+  
+    animation: spin 1.2s linear infinite;
+  }
+  
+  @keyframes spin {
+    to {
+      transform: rotate(360deg);
+    }
+  }
+  
   
