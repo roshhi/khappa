@@ -22,6 +22,23 @@ const categoryService = () => {
         create: async (categoryData) => {
             const response = await axios.post(API_BASE_URL, categoryData);
             return response.data;
+        },
+
+        delete: async (categoryId) => {
+            const category = await axios.get(`${API_BASE_URL}/${categoryId}`);
+            const catProductCount = category.data[0].product_count;
+            if (catProductCount > 0) {
+                throw new Error("Cannot delete category having products inside.");
+            }
+            else{
+                await axios.delete(`${API_BASE_URL}/${categoryId}`);
+            }
+        },
+
+        update: async (categoryId, updatedData) => {
+            console.log(updatedData);
+            const response = await axios.put(`${API_BASE_URL}/${categoryId}`, updatedData);
+            return response.data;
         }
     };
 };

@@ -34,6 +34,16 @@ const CategoriesPage = () => {
     const handleNewCategory = (newCat) => {
         setCategories(prev => [...prev, newCat]);
     };
+    const handleDeleteFromState = (id) => {
+        setCategories(prev => prev.filter(cat => cat.category_id !== id));
+    };
+    const handleUpdateFromState = (updatedCategory) => {
+        setCategories(prev => 
+            prev.map(cat => 
+                cat.category_id === updatedCategory.category_id ? updatedCategory : cat
+            )
+        );
+    };
 
     return (
 
@@ -59,6 +69,8 @@ const CategoriesPage = () => {
                                 title={category.name}
                                 description={category.description || "No description available"}
                                 count={category.product_count}
+                                handleDeleteFromState={handleDeleteFromState}
+                                handleUpdateFromState={handleUpdateFromState}
                             />
                         ))
                     }
