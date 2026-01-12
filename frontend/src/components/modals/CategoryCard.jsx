@@ -33,7 +33,7 @@ export default function CategoryCard({
                 <h2 className="text-2xl font-bold text-slate-900">
                 {title}
                 </h2>
-                <p className="text-slate-500 mt-2">
+                <p className="text-slate-500 mt-2 truncate">
                 {description}
                 </p>
             </div>

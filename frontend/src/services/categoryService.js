@@ -1,0 +1,29 @@
+import axios from "axios";
+
+const categoryService = () => {
+    const API_BASE_URL = "http://localhost:3000/api/categories";
+    const CLOUDINARY_URL = "https://api.cloudinary.com/v1_1/dt5lc3c4i/image/upload";
+
+    return {
+        getAll: async () => {
+            const response = await axios.get(API_BASE_URL);
+            return response.data;
+        },
+
+        uploadImage: async (file) => {
+            const formData = new FormData();
+            formData.append("file", file);
+            formData.append("upload_preset", "unsigned_upload");
+            
+            const response = await axios.post(CLOUDINARY_URL, formData);
+            return response.data.secure_url;
+        },
+
+        create: async (categoryData) => {
+            const response = await axios.post(API_BASE_URL, categoryData);
+            return response.data;
+        }
+    };
+};
+
+export default categoryService;

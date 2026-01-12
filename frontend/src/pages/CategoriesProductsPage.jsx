@@ -56,7 +56,7 @@ const CategoriesProductsPage = () => {
                                     image={product.image_url || "https://cdn.greatnews.life/wp-content/uploads/2022/11/Untitled-design-21.png"}
                                     name={product.name}
                                     description={product.description || "No description available"}
-                                    count={product.stock_count || 0}
+                                    count={product.quantity}
                                     price={product.price || 0}
                                     category_title={title}
                                 />

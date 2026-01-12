@@ -32,7 +32,7 @@ const ProductDetailsPage = () => {
                                 </div>
                                 <div>
                                     <h1>Current Stock</h1>
-                                    <h2>150 units</h2>
+                                    <h2>{state.count} units</h2>
                                 </div>
                             </div>
                         </div>
