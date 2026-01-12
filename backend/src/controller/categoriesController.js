@@ -46,8 +46,8 @@ async function deleteCategoryById(req, res) {  // Function to delete a category 
 async function updateCategoryById(req, res) {  // Function to update a category by ID
     try{
         const { id } = req.params;
-        const { name } = req.body;
-        const category = await db.updateCategory(id,name);
+        const { name,description,image } = req.body;
+        const category = await db.updateCategory(id,name,description,image);
         res.status(200).json(category);
         console.log('Fetched category:', category);
     }catch (error) {
