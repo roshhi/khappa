@@ -36,7 +36,7 @@ export default function ProductCard({
                 <h2 className="text-2xl font-bold text-slate-900">
                 {name}
                 </h2>
-                <p className="text-slate-500 mt-2">
+                <p className="text-slate-500 mt-2 truncate">
                 {description}
                 </p>
                 <p className="text-lg font-semibold text-slate-900 mt-4">

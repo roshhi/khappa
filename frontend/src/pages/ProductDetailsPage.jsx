@@ -26,8 +26,8 @@ const ProductDetailsPage = () => {
                         <h1 className='text-3xl font-extrabold'>{state.name}</h1>
                         <h2 className='text-3xl font-extrabold'>$ {state.price}</h2>
                         <div>
-                            <div className='rounded-2xl shadow-[0_0_12px_rgba(0,0,0,0.12)] p-4 flex items-center gap-4 bg-[#F8FAFC]'>
-                                <div className='p-1 rounded-xl h-fit bg-white shadow-md'>   
+                            <div className='rounded-2xl shadow-[0_0_12px_rgba(0,0,0,0.12)] p-4 flex items-center gap-4 bg-[#F8FAFC] group'>
+                                <div className='p-1 rounded-xl h-fit bg-white shadow-md group-hover:rotate-360 transition-all duration-500'>   
                                     <Boxes/>
                                 </div>
                                 <div>

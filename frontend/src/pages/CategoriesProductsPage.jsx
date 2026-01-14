@@ -1,10 +1,13 @@
 import React, { useState, useEffect } from 'react'
-import { ArrowLeft } from 'lucide-react'
+import { ArrowLeft, Plus } from 'lucide-react'
 import { useParams, useLocation } from 'react-router'
 import { NavLink } from 'react-router'
 import { ListFilter } from 'lucide-react'
 import axios from 'axios'
 import ProductCard from '../components/modals/ProductCard'
+import BlurModalWrapper from '../components/modals/BlurModalWrapper'
+import AddProductForm from '../components/Forms/AddProductForm'
+import productService from '../services/productService'
 
 const CategoriesProductsPage = () => {
 
@@ -13,6 +16,8 @@ const CategoriesProductsPage = () => {
     const { description,title } = location.state || {};
     const [categoriesProd, setCategoriesProd] = useState([]);
     const [loader, setLoader] = useState(true);
+    const [showForm, setShowForm] = useState(false);
+    const [tempQuantity, setTempQuantity] = useState(0);
 
     useEffect(()=>{
         axios.get("http://localhost:3000/api/categories/"+id+"/products")
@@ -23,49 +28,76 @@ const CategoriesProductsPage = () => {
         });
     },[])
 
-    return (
+    const handleNewProduct = (newProd,quantity) => {
+        console.log("New product added:", newProd);
+        setTempQuantity(quantity)
+        setCategoriesProd(prev => [...prev, newProd]);
+    };
 
-        <div className='p-3 mt-10 mx-auto max-w-7xl'>
-            <div className='flex flex-col gap-2'>
-                <NavLink to={'/categories'} className="w-fit">
-                    <button className='p-3 relative right-2 rounded-2xl flex items-center gap-2 text-[#62748E] font-medium mb-4 text-lg cursor-pointer hover:bg-[#EEF2FF]'>
-                        <ArrowLeft className='w-5 h-5'/>
-                        Back to Categories
-                    </button>
-                </NavLink>
-                <h1 class="capitalize text-4xl font-extrabold">{title}</h1>
-                <p className='text-xl text-[#62748E] mt-1'>{description}</p>
-                <div className='flex flex-col sm:flex-row sm:justify-between sm:items-center mt-6 gap-4'>
-                    <div>
-                        <input className='w-[90vw] sm:w-[80vw] xl:max-w-[1100px] rounded-2xl border-[#62748E] p-4 pl-9 shadow-[0_0_12px_rgba(0,0,0,0.12)]' type="text" placeholder="Search products..."/>
+    return (
+        <>
+            <div className='p-3 mt-10 mx-auto max-w-7xl'>
+                <div className='flex flex-col gap-2'>
+                    <NavLink to={'/categories'} className="w-fit">
+                        <button className='p-3 relative right-2 rounded-2xl flex items-center gap-2 text-[#62748E] font-medium mb-4 text-lg cursor-pointer hover:bg-[#EEF2FF]'>
+                            <ArrowLeft className='w-5 h-5'/>
+                            Back to Categories
+                        </button>
+                    </NavLink>
+                    <h1 class="capitalize text-4xl font-extrabold">{title}</h1>
+                    <p className='text-xl text-[#62748E] mt-1'>{description}</p>
+                    <div className='flex flex-col sm:flex-row sm:justify-between sm:items-center mt-6 gap-4'>
+                        <div>
+                            <input className='w-[90vw] sm:w-[80vw] xl:max-w-[1100px] rounded-2xl border-[#62748E] p-4 pl-9 shadow-[0_0_12px_rgba(0,0,0,0.12)]' type="text" placeholder="Search products..."/>
+                        </div>
+                        <div className='w-[90vw] sm:w-[20vw] xxl:max-w-[150px]  flex gap-2 bg-[#F0F5F9] rounded-2xl p-4 justify-center items-center'>
+                            <ListFilter />
+                            <p>Filters</p> 
+                        </div>
                     </div>
-                    <div className='w-[90vw] sm:w-[20vw] xxl:max-w-[150px]  flex gap-2 bg-[#F0F5F9] rounded-2xl p-4 justify-center items-center'>
-                        <ListFilter />
-                        <p>Filters</p> 
-                    </div>
+                    {loader ? <div className='loader fixed top-[70%] lg:top-[60%] left-[50%] translate-x-[-50%] translate-y-[-50%]'></div> 
+                    :
+                    <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-10 justify-items-center lg:justify-items-start'>
+                        {
+                            categoriesProd.map((product) =>{
+                                return (
+                                    <ProductCard
+                                        key={product.id}
+                                        id={product.product_id}
+                                        image={product.image_url || "https://cdn.greatnews.life/wp-content/uploads/2022/11/Untitled-design-21.png"}
+                                        name={product.name}
+                                        description={product.description || "No description available"}
+                                        count={product.quantity || tempQuantity}
+                                        price={product.price || 0}
+                                        category_title={title}
+                                    />
+                                )
+                            })
+                        }
+                        <div onClick={()=>setShowForm(true)} className=" w-[90vw] h-full sm:w-[45vw] lg:w-[30vw] xl:max-w-[400px] rounded-3xl bg-white shadow-lg overflow-hidden transition-transform duration-300 hover:-translate-y-1 border-3 border-dotted border-white hover:border-blue-500 group cursor-pointer">
+                            <div className=' flex h-80 flex-col gap-4 justify-center items-center'>
+                                <div className='flex justify-center items-center p-2 w-fit rounded-xl bg-[#F0F5F9] text-[#62748E]'>
+                                    <Plus className='transition-transform duration-500 group-hover:rotate-90 w-10 h-10' />                       
+                                </div>
+                                <h1 className='text-center text-xl '>Add Product</h1>
+                                <p className='text-center text-[#62748E]'>Add a new product in this category</p>
+                            </div>
+                        </div>
+                    </div>}
                 </div>
-                {loader ? <div className='loader fixed top-[70%] lg:top-[60%] left-[50%] translate-x-[-50%] translate-y-[-50%]'></div> 
-                :
-                <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-10 justify-items-center lg:justify-items-start'>
-                    {
-                        categoriesProd.map((product) =>{
-                            return (
-                                <ProductCard
-                                    key={product.id}
-                                    id={product.product_id}
-                                    image={product.image_url || "https://cdn.greatnews.life/wp-content/uploads/2022/11/Untitled-design-21.png"}
-                                    name={product.name}
-                                    description={product.description || "No description available"}
-                                    count={product.quantity}
-                                    price={product.price || 0}
-                                    category_title={title}
-                                />
-                            )
-                        })
-                    }
-                </div>}
             </div>
-        </div>
+            
+            {showForm && (
+                <BlurModalWrapper title={"Add Product"} onClose={()=>setShowForm(false)}>
+                    <AddProductForm
+                        onProductAdded={handleNewProduct}
+                        id={id}
+                        onClose={() => setShowForm(false)}
+                    />
+                </BlurModalWrapper>
+            )}
+        </>
+
     )
 }
 

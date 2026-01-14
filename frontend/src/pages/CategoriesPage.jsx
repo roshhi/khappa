@@ -18,11 +18,9 @@ const CategoriesPage = () => {
         const fetchCategories = async () => {
             try {
                 const data = await categoryService.getAll();
-                // Safety check: ensure data is an array
                 setCategories(Array.isArray(data) ? data : []);
             } catch (err) {
                 console.error("Failed to load categories:", err);
-                // Optional: set an error state here to show a message to the user
             } finally {
                 setLoader(false);
             }

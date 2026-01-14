@@ -11,7 +11,7 @@ const BlurModalWrapper = ({children,onClose,title}) => {
     >
         <div 
             onClick={(e) => e.stopPropagation()} 
-            className='w-120 h-140 rounded-2xl bg-[#F4F4F4]/90 backdrop-blur-md  p-6 shadow-lg'
+            className='w-120 h-fit rounded-2xl bg-[#F4F4F4]/90 backdrop-blur-md  p-6 shadow-lg'
         > 
             <div className='flex justify-between items-center mb-10'>
                 <h1 className='text-lg font-bold'>{title}</h1>

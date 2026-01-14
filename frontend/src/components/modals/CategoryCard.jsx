@@ -85,10 +85,10 @@ export default function CategoryCard({
             </h1>
             <p>This action cannot be undone.</p>
           </div>
-          <div className="flex justify-end gap-4 mt-6"> 
+          <div className="flex justify-center gap-4 w-full mt-6"> 
             <button
               onClick={() => setIsDelete(false)}
-              className="px-4 py-2 rounded-lg bg-gray-300 text-gray-800 hover:bg-gray-400 transition"
+              className="px-4 py-2 w-[45%] rounded-lg bg-white text-gray-800 transition hover:bg-gray-100"
             >
               Cancel
             </button>
@@ -103,7 +103,7 @@ export default function CategoryCard({
                   return;
                 }
               }}
-              className="px-4 py-2 rounded-lg bg-red-600 text-white hover:bg-red-700 transition"
+              className="px-4 py-2 w-[45%] rounded-lg bg-red-600 text-white hover:bg-red-700 transition"
             >
               Delete
             </button>
@@ -114,7 +114,6 @@ export default function CategoryCard({
     {isEdit && (
       <BlurModalWrapper title="Edit Category" onClose={() => setIsEdit(false)}>
         <div className="flex flex-col justify-center items-center gap-4 mt-6">
-          {/* <img src={image} alt="" className="rounded-2xl w-full h-62" /> */}
           <UpdateCategoryForm
             categoryId={id}
             existingTitle={title}
