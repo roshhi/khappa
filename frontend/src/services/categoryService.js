@@ -10,6 +10,11 @@ const categoryService = () => {
             return response.data;
         },
 
+        getCategoryCount: async () => {
+            const categories = await axios.get(API_BASE_URL);
+            return categories.data.length;
+        },
+
         uploadImage: async (file) => {
             const formData = new FormData();
             formData.append("file", file);
@@ -40,6 +45,8 @@ const categoryService = () => {
             const response = await axios.put(`${API_BASE_URL}/${categoryId}`, updatedData);
             return response.data;
         }
+
+
     };
 };
 

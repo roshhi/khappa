@@ -10,6 +10,21 @@ const productService = () => {
             return response.data;
         },
 
+        getProductCount: async () => {
+            const products = await axios.get(API_BASE_URL);
+            return products.data.length;
+        },
+
+        getStocksCount: async () => {
+            const response = await axios.get(API_BASE_URL);
+        
+            const totalStock = response.data.reduce(
+                (sum, product) => sum + Number(product.quantity),
+                0
+            );
+            return totalStock;
+        },
+
         uploadImage: async (file) => {
             const formData = new FormData();
             formData.append("file", file);

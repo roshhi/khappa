@@ -1,13 +1,20 @@
 import {CirclePile, ArrowRight, Package, ShoppingBag, TrendingUp } from "lucide-react";
 import { NavLink } from 'react-router-dom';
 import { motion } from 'framer-motion';
+import productService from "../services/productService";
+import categoryService from "../services/categoryService";
 
 export default function LandingPage(){
+
+
+    const totalStocks = productService().getStocksCount();
+    const totalCategories = categoryService().getCategoryCount();
+    const totalProducts = productService().getProductCount();
 
     const stats = [
         {
           label: 'Total Stock',
-          value: 498,
+          value: {totalStocks},
           icon: Package,
           color: 'from-violet-500 to-purple-600',
           delay: 0.1,
@@ -16,7 +23,7 @@ export default function LandingPage(){
         },
         {
           label: 'Products',
-          value: 36,
+          value: {totalProducts},
           icon: ShoppingBag,
           color: 'from-cyan-500 to-blue-600',
           delay: 0.2,
@@ -25,7 +32,7 @@ export default function LandingPage(){
         },
         {
           label: 'Categories',
-          value: 4,
+          value: {totalCategories},
           icon: TrendingUp,
           color: 'from-emerald-500 to-green-600',
           delay: 0.3,
