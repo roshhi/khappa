@@ -1,8 +1,8 @@
 import axios from "axios";
 
 const productService = () => {
-    const API_BASE_URL = "http://localhost:3000/api/products";
-    const CLOUDINARY_URL = "https://api.cloudinary.com/v1_1/dt5lc3c4i/image/upload";
+    const API_BASE_URL = `${import.meta.env.VITE_API_BASE_URL}/products`;
+    const CLOUDINARY_URL = import.meta.env.VITE_CLOUDINARY_URL;
 
     return {
         getAll: async () => {

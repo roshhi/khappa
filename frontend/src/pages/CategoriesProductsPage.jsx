@@ -9,6 +9,7 @@ import BlurModalWrapper from '../components/modals/BlurModalWrapper'
 import AddProductForm from '../components/Forms/AddProductForm'
 import CategorySkeletonGrid from '../components/ui/CategorySkeletonGrid'
 import {motion} from 'framer-motion'
+
 const CategoriesProductsPage = () => {
 
     const { id } = useParams();
@@ -20,8 +21,8 @@ const CategoriesProductsPage = () => {
     const [tempQuantity, setTempQuantity] = useState(0);
 
     useEffect(()=>{
-        axios.get("http://localhost:3000/api/categories/"+id+"/products")
-        .then((res)=>{ setCategoriesProd(res.data); })
+        axios.get(`${import.meta.env.VITE_API_BASE_URL}/categories/${id}/products`)
+        .then((res)=>{ setCategoriesProd(res.data); console })
         .catch((err)=>{ console.log(err); })
         .finally(() => {
             setLoader(false);
