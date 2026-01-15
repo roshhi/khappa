@@ -22,8 +22,22 @@ async function getProductsByCategory(id) { // fetch products by category id
   return rows;
 }
 
-async function updateProductById(id,name,price,description,image_url) { // update product by id
-    const { rows } = await pool.query(
+async function updateProductById(
+  id,
+  name,
+  price,
+  description,
+  image_url,
+  stock
+) {
+  const client = await pool.connect();
+
+  try {
+    // Start transaction
+    await client.query("BEGIN");
+
+    // Update product table
+    const productResult = await client.query(
       `
       UPDATE products
       SET
@@ -36,8 +50,31 @@ async function updateProductById(id,name,price,description,image_url) { // updat
       `,
       [id, name, price, description, image_url]
     );
-    return rows[0];
+
+    // Update inventory table
+    await client.query(
+      `
+      UPDATE inventory
+      SET quantity = $2
+      WHERE product_id = $1;
+      `,
+      [id, stock]
+    );
+
+    // Commit transaction
+    await client.query("COMMIT");
+
+    return productResult.rows[0];
+
+  } catch (error) {
+    // Rollback if anything fails
+    await client.query("ROLLBACK");
+    throw error;
+  } finally {
+    client.release();
+  }
 }
+
   
 async function createNewProduct(
   name,

@@ -24,8 +24,9 @@ async function fetchProductById(req, res) {  // Function to fetch a product by I
 async function updateProduct(req, res) { // Function to update a product by ID
     try {
         const { id } = req.params;
-        const { name,price,description,image_url } = req.body;
-        const product = await db.updateProductById(id,name,price,description,image_url);
+        const { name,price,description,image_url,stock,category_id } = req.body;
+        console.log(name,price,description,image_url,stock,category_id)
+        const product = await db.updateProductById(id,name,price,description,image_url,stock);
         res.status(200).json(product);
         console.log('Fetched product:', product);
     } catch (error) {
