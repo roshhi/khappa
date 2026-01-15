@@ -7,6 +7,7 @@ import axios from 'axios'
 import ProductCard from '../components/modals/ProductCard'
 import BlurModalWrapper from '../components/modals/BlurModalWrapper'
 import AddProductForm from '../components/Forms/AddProductForm'
+import CategorySkeletonGrid from '../components/ui/CategorySkeletonGrid'
 
 const CategoriesProductsPage = () => {
 
@@ -54,7 +55,7 @@ const CategoriesProductsPage = () => {
                             <p>Filters</p> 
                         </div>
                     </div>
-                    {loader ? <div className='loader fixed top-[70%] lg:top-[60%] left-[50%] translate-x-[-50%] translate-y-[-50%]'></div> 
+                    {loader ? <CategorySkeletonGrid/> 
                     :
                     <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-10 justify-items-center lg:justify-items-start'>
                         {
@@ -63,10 +64,10 @@ const CategoriesProductsPage = () => {
                                     <ProductCard
                                         key={product.id}
                                         id={product.product_id}
-                                        image={product.image_url || "https://cdn.greatnews.life/wp-content/uploads/2022/11/Untitled-design-21.png"}
+                                        image_url={product.image_url || "https://cdn.greatnews.life/wp-content/uploads/2022/11/Untitled-design-21.png"}
                                         name={product.name}
                                         description={product.description || "No description available"}
-                                        count={product.quantity || tempQuantity}
+                                        stock={product.quantity || tempQuantity}
                                         price={product.price || 0}
                                         category_title={title}
                                     />

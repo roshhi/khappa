@@ -6,6 +6,7 @@ import { NavLink } from 'react-router';
 import AddCategoryForm from '../components/Forms/AddCategoryForm';
 import BlurModalWrapper from '../components/modals/BlurModalWrapper';
 import categoryServiceFunc from '../services/categoryService';
+import CategorySkeletonGrid from '../components/ui/CategorySkeletonGrid';
 
 const CategoriesPage = () => {
 
@@ -55,7 +56,7 @@ const CategoriesPage = () => {
 
             <h1 className='text-3xl font-extrabold'>Categories</h1>
             <p className='text-xl text-[#62748E] mt-3'>Browse and manage your product categories</p>
-            {loader ? <div className='loader fixed top-[60%] lg:top-[55%] left-[50%] translate-x-[-50%] translate-y-[-50%]'></div> :
+            {loader ? <CategorySkeletonGrid />:
                 
                 <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-10 justify-items-center lg:justify-items-start'> 
                     {

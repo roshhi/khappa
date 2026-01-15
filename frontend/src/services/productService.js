@@ -20,7 +20,6 @@ const productService = () => {
         },
 
         create: async (productData) => {
-            console.log(productData);
             const response = await axios.post(API_BASE_URL, productData);
             console.log(response.data);
             return response.data;
@@ -34,7 +33,6 @@ const productService = () => {
         },
 
         update: async (productId, updatedData) => {
-            console.log(updatedData);
             const response = await axios.put(`${API_BASE_URL}/${productId}`, updatedData);
             return response.data;
         }

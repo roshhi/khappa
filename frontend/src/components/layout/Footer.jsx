@@ -2,7 +2,7 @@ import { Github } from 'lucide-react';
 
 export default function Footer() {
   return (
-      <div className="max-w w-full mx-auto shadow-[0_0_58px_rgba(0,0,0,0.1)] p-2">
+      <div className="max-w w-full mt-10 mx-auto shadow-[0_0_58px_rgba(0,0,0,0.1)] p-2">
           <div className="flex flex-col md:flex-row items-center justify-evenly gap-4">
             <div className="text-sm text-gray-400 flex items-center gap-2">
                 <p>Copyright</p>
