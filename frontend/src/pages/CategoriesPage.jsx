@@ -38,12 +38,15 @@ const CategoriesPage = () => {
         setCategories(prev => prev.filter(cat => cat.category_id !== id));
     };
     const handleUpdateFromState = (updatedCategory) => {
-        setCategories(prev => 
-            prev.map(cat => 
-                cat.category_id === updatedCategory.category_id ? updatedCategory : cat
-            )
+        setCategories(prev =>
+          prev.map(cat =>
+            cat.category_id === updatedCategory.category_id
+              ? { ...updatedCategory, product_count: cat.product_count }
+              : cat
+          )
         );
-    };
+      };
+      
     const containerVariants = {
         hidden: {},
         visible: {
